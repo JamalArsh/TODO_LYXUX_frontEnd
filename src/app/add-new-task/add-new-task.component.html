@@ -1,0 +1,55 @@
+<h2 *ngIf="isAddNew">ADD NEW TASK</h2>
+<h2 *ngIf="!isAddNew">EDIT TASK</h2>
+
+<form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label nzFor="title" nzRequired>Title</nz-form-label>
+    <nz-form-control nzErrorTip="Title cannot be empty">
+      <input
+        placeholder="Task title"
+        nz-input
+        name="title"
+        type="text"
+        id="title"
+        formControlName="title"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control nzHasFeedback>
+      <nz-textarea-count [nzMaxCharacterCount]="200">
+        <textarea
+          nz-input
+          rows="2"
+          placeholder="write any thing"
+          formControlName="description"
+          [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+        ></textarea>
+      </nz-textarea-count>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="12">
+      <button nz-button nzDanger="true" nzType="primary" type="reset" nzBlock>
+        Reset
+      </button>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <button *ngIf="isAddNew" nz-button nzType="primary" type="submit" nzBlock>
+        Add
+      </button>
+      <button
+        *ngIf="!isAddNew"
+        nz-button
+        nzType="primary"
+        type="submit"
+        nzBlock
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+</form>
